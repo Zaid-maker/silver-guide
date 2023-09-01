@@ -1,3 +1,13 @@
+async function genReportLog(container, key, url) {
+    const response = await fetch("logs/" + key + "_report.log")
+
+    let statusLines = ""
+
+    if (response.ok) {
+        statusLines = await response.text()
+    }
+}
+
 async function genAllReports() {
     const response = await fetch("urls.cfg")
     const configText = await response.text()
@@ -10,5 +20,7 @@ async function genAllReports() {
         if (!key || !url) {
             continue
         }
+
+        await genReportLog(document.getElementById("reports", key, url))
     }
 }
