@@ -1,0 +1,28 @@
+version: 2.1
+jobs:
+  health_check_job:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+
+      - run:
+          name: Install my Package
+          command: npm i -g pm2-windows-boot
+
+      - run:
+          name: Install discord-jokes
+          command: npm i -g discord-jokes
+
+      - run:
+          name: Run Shell Script
+          command: bash ./health-check.sh
+
+workflows:
+  version: 2
+  scheduled_health_check:
+    triggers:
+      - schedule:
+          cron: "0,15,30,45 * * * *"
+    jobs:
+      - health_check_job
