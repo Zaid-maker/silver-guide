@@ -24,9 +24,5 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0,15,30,45 * * ?"
-        filters:
-          branches:
-            only:
-              - main
     jobs:
       - health_check_job
