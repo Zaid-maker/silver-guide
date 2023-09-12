@@ -23,6 +23,6 @@ workflows:
   scheduled_health_check:
     triggers:
       - schedule:
-          cron: "0 0,15,30,45 * * *"
+          cron: "0 0,15,30,45 * * * *"
     jobs:
       - health_check_job
