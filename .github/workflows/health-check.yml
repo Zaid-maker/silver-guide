@@ -4,14 +4,18 @@ name: Scheduled Health Check
 on:
   schedule:
     - cron: "0,15,30,45 * * * *"
+  workflow_dispatch:
 
 jobs:
   health_check_job:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+    runs-on: ${{ matrix.os }}
     name: Check all sites
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run Shell Script
         id: shell_script_run
